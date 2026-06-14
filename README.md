@@ -8,20 +8,9 @@ A fully functional product management web application built with React.js, Node.
 
 ## Live Demo
 
-- Frontend: [https://productr.vercel.app](https://productr.vercel.app) *(update after deploy)*
-- Backend API: [https://productr-api.onrender.com](https://productr-api.onrender.com) *(update after deploy)*
-
----
-
-## Table of Contents
-
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Environment Variables](#environment-variables)
-- [API Reference](#api-reference)
-- [Deployment Guide](#deployment-guide)
+- **Frontend:** https://productr-s.vercel.app
+- **Backend API:** https://productr-muvu.onrender.com
+- **GitHub:** https://github.com/mayanknaruka/productr
 
 ---
 
@@ -94,7 +83,7 @@ productr/
 
 ## Features
 
-- OTP-based login — enter email, get OTP in your inbox (or on screen in demo mode)
+- OTP-based login — enter email, OTP arrives in inbox (or shown on screen in demo mode)
 - Register new account
 - Add products: name, type, stock, MRP, selling price, brand, images, return eligibility
 - Edit product via pre-filled modal
@@ -115,8 +104,6 @@ productr/
 - Node.js >= 18
 - A free MongoDB Atlas account
 
----
-
 ### 1. Clone the repo
 
 ```bash
@@ -124,40 +111,27 @@ git clone https://github.com/mayanknaruka/productr.git
 cd productr
 ```
 
----
-
 ### 2. Backend setup
 
 ```bash
 cd server
 npm install
-```
-
-Create your `.env` file:
-
-```bash
 copy .env.example .env
 ```
 
-Fill in the values (see [Environment Variables](#environment-variables) below).
-
-Start the server:
+Fill in `server/.env` (see Environment Variables below), then:
 
 ```bash
 npm run dev
 ```
 
-You should see:
+Expected output:
 ```
 Server running on port 5000
 MongoDB connected
 ```
 
----
-
 ### 3. Frontend setup
-
-Open a new terminal:
 
 ```bash
 cd client
@@ -166,8 +140,6 @@ npm run dev
 ```
 
 Frontend runs at: **http://localhost:5173**
-
----
 
 ### 4. Seed sample data
 
@@ -182,44 +154,39 @@ Output: `✓ Seeded 12 products`
 
 ## Environment Variables
 
-Create `server/.env` based on `server/.env.example`:
+Create `server/.env` from `server/.env.example`:
 
 ```env
 PORT=5000
 MONGO_URI=mongodb+srv://user:password@cluster.mongodb.net/orufy_db
 EMAIL_USER=yourgmail@gmail.com
-EMAIL_PASS=your_gmail_app_password
+EMAIL_PASS=your_16char_app_password
+CLIENT_URL=https://productr-s.vercel.app
 ```
 
-| Variable     | Required | Description                                      |
-|--------------|----------|--------------------------------------------------|
-| `PORT`       | No       | Express server port (default 5000)               |
-| `MONGO_URI`  | Yes      | MongoDB Atlas connection string                  |
-| `EMAIL_USER` | No       | Gmail address to send OTP from                   |
-| `EMAIL_PASS` | No       | Gmail App Password (16 chars, no spaces)         |
+| Variable     | Required | Description                                        |
+|--------------|----------|----------------------------------------------------|
+| `PORT`       | No       | Express server port (default 5000)                 |
+| `MONGO_URI`  | Yes      | MongoDB Atlas connection string                    |
+| `EMAIL_USER` | No       | Gmail address to send OTP from                     |
+| `EMAIL_PASS` | No       | Gmail App Password (16 chars, no spaces)           |
+| `CLIENT_URL` | No       | Frontend URL for CORS (default allows all)         |
 
-> If `EMAIL_USER` / `EMAIL_PASS` are not set, OTP shows on screen (demo mode).
-
-### How to get Gmail App Password
-
-1. Go to [myaccount.google.com/security](https://myaccount.google.com/security)
-2. Enable **2-Step Verification**
-3. Go to **App Passwords** → create one named "Productr"
-4. Copy the 16-character password → paste into `EMAIL_PASS` (no spaces)
+> If `EMAIL_USER` / `EMAIL_PASS` are not set, OTP is shown on screen (demo mode).
 
 ---
 
 ## API Reference
 
-Base URL: `http://localhost:5000/api`
+Base URL: `https://productr-muvu.onrender.com/api`
 
 ### Auth
 
-| Method | Endpoint            | Description                     |
-|--------|---------------------|---------------------------------|
-| POST   | `/auth/register`    | Register new user               |
-| POST   | `/auth/send-otp`    | Send OTP to email/phone         |
-| POST   | `/auth/verify-otp`  | Verify OTP and login            |
+| Method | Endpoint            | Description              |
+|--------|---------------------|--------------------------|
+| POST   | `/auth/register`    | Register new user        |
+| POST   | `/auth/send-otp`    | Send OTP to email/phone  |
+| POST   | `/auth/verify-otp`  | Verify OTP and login     |
 
 ### Products
 
@@ -231,48 +198,28 @@ Base URL: `http://localhost:5000/api`
 | PUT    | `/products/:id`    | Update product       |
 | DELETE | `/products/:id`    | Delete product       |
 
-### Contact
-
-| Method | Endpoint    | Description            |
-|--------|-------------|------------------------|
-| POST   | `/contact`  | Submit contact form    |
-| GET    | `/contact`  | Get all messages       |
-
 ---
 
-## Deployment Guide
+## Deployment
 
-### Backend → Render.com (free)
+### Backend — Render.com
 
-1. Go to [render.com](https://render.com) → New → Web Service
-2. Connect GitHub → select `productr` repo
-3. Settings:
-   - Root directory: `server`
-   - Build command: `npm install`
-   - Start command: `npm start`
-4. Add environment variables:
-   - `MONGO_URI` = your Atlas URI
-   - `EMAIL_USER` = your Gmail
-   - `EMAIL_PASS` = your App Password
-   - `CLIENT_URL` = your Vercel URL (e.g. `https://productr.vercel.app`)
-5. Deploy → copy your Render URL
+- Root directory: `server`
+- Build command: `npm install`
+- Start command: `npm start`
+- Environment variables: `MONGO_URI`, `EMAIL_USER`, `EMAIL_PASS`, `CLIENT_URL`
 
-### Frontend → Vercel.com (free)
+### Frontend — Vercel.com
 
-1. Go to [vercel.com](https://vercel.com) → New Project
-2. Import `productr` repo from GitHub
-3. Settings:
-   - Root directory: `client`
-   - Framework preset: Vite
-4. Add environment variable:
-   - `VITE_API_URL` = your Render URL + `/api` (e.g. `https://productr-api.onrender.com/api`)
-5. Deploy → your live URL is ready
+- Root directory: `client`
+- Framework: Vite
+- Environment variable: `VITE_API_URL` = `https://productr-muvu.onrender.com/api`
 
 ---
 
 ## How to Use
 
-1. Open the app URL
+1. Open **https://productr-s.vercel.app**
 2. Enter your email → click **Login**
 3. OTP arrives in your inbox (or shown on screen in demo mode)
 4. Enter the 6-digit OTP → logged in
