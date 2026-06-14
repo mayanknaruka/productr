@@ -1,0 +1,69 @@
+Assignment for Full Stack Developer
+Orufy Technologies Pvt. Ltd.
+
+Assignment Details
+Project: Build the website as designed in the provided Figma file.
+Figma link (https://www.figma.com/design/jz1CdCk9aaW5itU99sC6uB/Assignment-_Dev?node-id=1-770&t=gAEZfGOdDHL1lavW-4)
+
+Goal
+You are required to develop a fully functional website exactly as designed in the shared Figma
+The website must be built using:
+● Frontend: React.js
+● Backend: Node.js + Express.js
+● Database: MongoDB
+● Version Control & Delivery: GitHub repository link and application should be hosted online
+
+Key Requirements
+
+Frontend
+● Replicate all screens and UI elements from the Figma file.
+● Proper component structure and reusable UI elements.
+● API integration using Axios or Fetch.
+● Include loading and error handling where relevant.
+
+Backend
+● Create REST APIs using Node.js + Express.
+● Database integration using MongoDB (Mongoose recommended).
+● Create necessary models and CRUD APIs based on the content shown in the design.
+● Input validation and proper error responses.
+
+Database
+● Design schema(s) for the content used across the website.
+  Example: Users, Products or any content type visible in the design.
+● Add sample data to display meaningful content in the UI.
+
+Functional Expectations
+Based on the design structure (pages, cards, forms, navigation, etc.) implement:
+● Navigation across all website pages shown in Figma.
+● Display of dynamic content retrieved from backend APIs.
+● Any forms in the design must:
+  ○ Submit data to the backend
+  ○ Persist to MongoDB
+  ○ Reflect changes on UI (CRUD as required by design)
+
+Assignment for Full Stack Developer
+Orufy Technologies Pvt. Ltd.
+
+Deployment & Submission
+● Host the project on GitHub.
+● The repository must include:
+  ○ Clear folder structure (client/ and server/)
+  ○ Set up instructions in a README.md:
+    ■ How to run the frontend
+    ■ How to run the backend
+    ■ Required environment variables (e.g., MongoDB URI)
+
+Evaluation Criteria
+
+Parameter              What We Look For
+Pixel-perfect UI       Accuracy to the Figma Design
+Functionality          APIs working + smooth navigation
+Code Quality           Modular & scalable project structure
+Responsiveness         Works on desktop & mobile
+Data Handling          Proper CRUD implementation
+Git Usage              Clean commits and documentation
+
+Submission:
+1. The assignment must be completed within a timeframe of 2 days.
+2. Kindly share the drive for the updated CV, which includes a portfolio (public access)
+3. Share the GitHub repository link, and the application should be hosted online.

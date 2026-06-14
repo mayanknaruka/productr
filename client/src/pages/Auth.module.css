@@ -1,0 +1,122 @@
+.formWrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 28px;
+  line-height: 1.3;
+}
+
+.field { margin-bottom: 16px; }
+
+.label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 7px;
+}
+
+.input {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1.5px solid #d8d8e0;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  background: #fff;
+  color: #1a1a1a;
+  transition: border-color 0.2s;
+}
+.input:focus { border-color: #1a237e; }
+.inputErr { border-color: #e53e3e !important; }
+
+/* OTP boxes */
+.otpRow { display: flex; gap: 8px; }
+
+.otpBox {
+  width: 46px;
+  height: 46px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: 1.5px solid #d8d8e0;
+  border-radius: 6px;
+  background: #fff;
+  color: #1a1a1a;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.otpBox:focus { border-color: #1a237e; }
+.otpBoxErr { border-color: #e53e3e !important; }
+
+.errMsg {
+  font-size: 0.76rem;
+  color: #e53e3e;
+  margin-top: 5px;
+  display: block;
+}
+
+/* Primary button */
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #1a237e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-top: 6px;
+  transition: background 0.2s;
+  letter-spacing: 0.2px;
+}
+.btn:hover:not(:disabled) { background: #141a60; }
+.btn:disabled { opacity: 0.65; cursor: not-allowed; }
+
+/* Resend */
+.resendRow {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-top: 12px;
+}
+
+.resendLink {
+  background: none;
+  border: none;
+  color: #1a237e;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.resendTimer { color: #1a237e; font-weight: 700; }
+
+/* Bottom signup box */
+.signupBox {
+  border: 1.5px solid #e4e4ec;
+  border-radius: 8px;
+  padding: 14px 16px;
+  text-align: center;
+  background: #fff;
+}
+
+.signupGray {
+  font-size: 0.78rem;
+  color: #bbb;
+  margin-bottom: 4px;
+}
+
+.signupLink {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #1a237e;
+}
+.signupLink:hover { text-decoration: underline; }

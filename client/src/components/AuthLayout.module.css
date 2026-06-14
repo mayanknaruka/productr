@@ -1,0 +1,133 @@
+.page {
+  min-height: 100vh;
+  background: #555c72;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 52% 48%;
+  width: 100%;
+  max-width: 960px;
+  min-height: 580px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+}
+
+/* ── Left panel: wavy 3D abstract background ── */
+.left {
+  position: relative;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Base gradient matching the blue-purple-pink-peach in the screenshot */
+  background:
+    radial-gradient(ellipse at 15% 10%, #b8c8e8 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 15%, #c4b8e0 0%, transparent 40%),
+    radial-gradient(ellipse at 10% 60%, #d4c0e4 0%, transparent 45%),
+    radial-gradient(ellipse at 80% 55%, #c8b4d8 0%, transparent 40%),
+    radial-gradient(ellipse at 40% 85%, #e8ccc0 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 90%, #ecd4c4 0%, transparent 45%),
+    linear-gradient(160deg, #c0ccec 0%, #ccc0e4 30%, #d8bcd8 55%, #e8c8bc 75%, #f0d8cc 100%);
+}
+
+/* Wavy rope shapes via pseudo-elements */
+.left::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+  background: rgba(255,255,255,0.18);
+  top: -120px;
+  left: -100px;
+  transform: rotate(-20deg);
+  pointer-events: none;
+}
+
+.left::after {
+  content: '';
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%;
+  background: rgba(255,255,255,0.12);
+  bottom: -100px;
+  right: -80px;
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+.brandTop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.logoText {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1a237e;
+  letter-spacing: 0.2px;
+}
+
+.logoEmoji {
+  font-size: 1.1rem;
+}
+
+/* Floating runner card — centered vertically in left panel */
+.floatingCard {
+  position: relative;
+  z-index: 2;
+  width: 210px;
+  margin: auto;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 60px rgba(80, 40, 10, 0.4),
+    0 8px 20px rgba(0,0,0,0.25);
+  /* Orange-brown gradient matching screenshot */
+  background: linear-gradient(175deg, #e8932a 0%, #c06820 35%, #7a3a10 65%, #1a0808 100%);
+}
+
+.runnerImg {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+  mix-blend-mode: luminosity;
+  opacity: 0.92;
+}
+
+.floatingText {
+  text-align: center;
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 16px 20px 20px;
+  line-height: 1.45;
+  letter-spacing: 0.1px;
+}
+
+/* ── Right panel ── */
+.right {
+  background: #f4f5f8;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 52px 56px;
+}
+
+@media (max-width: 700px) {
+  .card { grid-template-columns: 1fr; }
+  .left { display: none; }
+  .right { padding: 40px 28px; }
+}
