@@ -16,9 +16,14 @@ export default function OTP() {
   const location = useLocation()
   const { login } = useAuth()
   const contact = location.state?.contact || ''
+  const demoOtp = location.state?.demoOtp || ''
 
   useEffect(() => {
     if (!contact) navigate('/login')
+    // Auto-fill OTP if demo mode
+    if (demoOtp) {
+      setOtp(demoOtp.split(''))
+    }
     inputs.current[0]?.focus()
   }, [])
 
@@ -88,6 +93,11 @@ export default function OTP() {
         <form onSubmit={handleSubmit} noValidate>
           <div className={styles.field}>
             <label className={styles.label}>Enter OTP</label>
+            {demoOtp && (
+              <div className={styles.demoBox}>
+                Your OTP: <strong>{demoOtp}</strong>
+              </div>
+            )}
             <div className={styles.otpRow} onPaste={handlePaste}>
               {otp.map((digit, i) => (
                 <input

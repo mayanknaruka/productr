@@ -8,16 +8,22 @@ export default function Login() {
   const [contact, setContact] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [demoOtp, setDemoOtp] = useState('')
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!contact.trim()) { setError('Please enter your email or phone number.'); return }
     setError('')
+    setDemoOtp('')
     setLoading(true)
     try {
-      await api.post('/auth/send-otp', { contact: contact.trim() })
-      navigate('/otp', { state: { contact: contact.trim() } })
+      const res = await api.post('/auth/send-otp', { contact: contact.trim() })
+      // Show OTP on screen for demo (when email is not configured)
+      if (res.data.demo_otp) {
+        setDemoOtp(res.data.demo_otp)
+      }
+      navigate('/otp', { state: { contact: contact.trim(), demoOtp: res.data.demo_otp } })
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to send OTP. Try again.')
     } finally {
@@ -37,12 +43,18 @@ export default function Login() {
               type="text"
               placeholder="Enter email or phone number"
               value={contact}
-              onChange={e => setContact(e.target.value)}
+              onChange={e => { setContact(e.target.value); setError('') }}
               className={`${styles.input} ${error ? styles.inputErr : ''}`}
               autoFocus
             />
-            {error && <p className={styles.errMsg}>{error}</p>}
+            {error && <span className={styles.errMsg}>{error}</span>}
           </div>
+
+          {demoOtp && (
+            <div className={styles.demoBox}>
+              Demo OTP: <strong>{demoOtp}</strong>
+            </div>
+          )}
 
           <button type="submit" className={styles.btn} disabled={loading}>
             {loading ? 'Sending OTP...' : 'Login'}

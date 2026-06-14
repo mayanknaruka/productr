@@ -99,6 +99,19 @@
 
 .resendTimer { color: #1a237e; font-weight: 700; }
 
+/* Demo OTP hint box */
+.demoBox {
+  background: #fff8e1;
+  border: 1.5px solid #ffe082;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.demoBox strong { color: #1a237e; font-size: 1.1rem; letter-spacing: 3px; }
+
 /* Bottom signup box */
 .signupBox {
   border: 1.5px solid #e4e4ec;

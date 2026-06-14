@@ -6,110 +6,105 @@ A fully functional product management web application built with React.js, Node.
 
 ---
 
+## Live Demo
+
+- Frontend: [https://productr.vercel.app](https://productr.vercel.app) *(update after deploy)*
+- Backend API: [https://productr-api.onrender.com](https://productr-api.onrender.com) *(update after deploy)*
+
+---
+
 ## Table of Contents
 
-- [Project Overview](#project-overview)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Features](#features)
 - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [1. Clone the Repository](#1-clone-the-repository)
-  - [2. Backend Setup](#2-backend-setup)
-  - [3. Frontend Setup](#3-frontend-setup)
-  - [4. Seed the Database](#4-seed-the-database)
 - [Environment Variables](#environment-variables)
 - [API Reference](#api-reference)
-- [How to Use the App](#how-to-use-the-app)
-
----
-
-## Project Overview
-
-Productr is a product listing and management platform. Users can register/login via OTP, then manage their products — add, edit, publish/unpublish, and delete — all reflected in real-time from a MongoDB-backed REST API.
+- [Deployment Guide](#deployment-guide)
 
 ---
 
 ## Tech Stack
 
-| Layer      | Technology                                      |
-|------------|-------------------------------------------------|
+| Layer      | Technology                                           |
+|------------|------------------------------------------------------|
 | Frontend   | React.js (Vite), React Router v6, Axios, CSS Modules |
-| Backend    | Node.js, Express.js, express-validator          |
-| Database   | MongoDB Atlas, Mongoose                         |
-| Auth       | OTP-based login (no password)                   |
+| Backend    | Node.js, Express.js, express-validator               |
+| Database   | MongoDB Atlas, Mongoose                              |
+| Auth       | OTP-based login via Email (Nodemailer + Gmail)       |
+| Hosting    | Vercel (frontend) + Render (backend)                 |
 
 ---
 
 ## Project Structure
 
 ```
-Assignment/
-├── client/                        # React.js frontend
+productr/
+├── client/                        # React.js frontend (Vite)
 │   ├── index.html
 │   ├── vite.config.js
 │   └── src/
-│       ├── main.jsx
 │       ├── App.jsx
+│       ├── main.jsx
 │       ├── index.css
 │       ├── api/
-│       │   ├── axios.js           # Axios base config
-│       │   ├── products.js        # Product API calls
+│       │   ├── axios.js
+│       │   ├── products.js
 │       │   └── contact.js
 │       ├── context/
-│       │   └── AuthContext.jsx    # Auth state (localStorage)
+│       │   └── AuthContext.jsx
 │       ├── components/
-│       │   ├── AuthLayout.jsx     # Login/OTP split-screen layout
-│       │   ├── AppLayout.jsx      # Sidebar + main area layout
-│       │   ├── Sidebar.jsx        # Left dark navigation
-│       │   ├── TopBar.jsx         # Gradient top bar with avatar
-│       │   ├── ProductCard.jsx    # Product card with CRUD actions
+│       │   ├── AuthLayout.jsx
+│       │   ├── AppLayout.jsx
+│       │   ├── Sidebar.jsx
+│       │   ├── TopBar.jsx
+│       │   ├── ProductCard.jsx
 │       │   ├── AddProductModal.jsx
 │       │   ├── EditProductModal.jsx
 │       │   ├── DeleteModal.jsx
 │       │   ├── EmptyState.jsx
 │       │   └── Toast.jsx
 │       └── pages/
-│           ├── Login.jsx          # Email/phone login
-│           ├── OTP.jsx            # 6-digit OTP verification
-│           ├── Register.jsx       # New account signup
-│           ├── Dashboard.jsx      # Home — Published/Unpublished tabs
-│           └── Products.jsx       # Products list + add
+│           ├── Login.jsx
+│           ├── OTP.jsx
+│           ├── Register.jsx
+│           ├── Dashboard.jsx
+│           └── Products.jsx
 │
 └── server/                        # Node.js + Express backend
-    ├── .env                       # Environment variables (not committed)
-    ├── .env.example               # Template
+    ├── .env.example
     └── src/
-        ├── index.js               # Express app entry point
-        ├── seed.js                # Sample data seeder
-        ├── config/
-        │   └── db.js              # MongoDB connection
+        ├── index.js
+        ├── seed.js
+        ├── config/db.js
         ├── models/
         │   ├── User.js
         │   ├── Product.js
         │   └── Contact.js
-        └── routes/
-            ├── authRoutes.js      # /api/auth
-            ├── productRoutes.js   # /api/products
-            └── contactRoutes.js   # /api/contact
+        ├── routes/
+        │   ├── authRoutes.js
+        │   ├── productRoutes.js
+        │   └── contactRoutes.js
+        └── utils/
+            └── mailer.js
 ```
 
 ---
 
 ## Features
 
-- OTP-based login (no passwords) — enter email/phone, get OTP in server console
+- OTP-based login — enter email, get OTP in your inbox (or on screen in demo mode)
 - Register new account
-- Add products with: name, type, stock, MRP, selling price, brand, images, return eligibility
-- Edit any product via pre-filled modal
+- Add products: name, type, stock, MRP, selling price, brand, images, return eligibility
+- Edit product via pre-filled modal
 - Delete product with confirmation dialog
 - Publish / Unpublish products
-- Home dashboard shows Published and Unpublished tabs separately
-- Products page with full CRUD
-- Success toast notifications
-- Loading states and error handling
-- Fully responsive — works on desktop and mobile
-- Input validation on all forms (frontend + backend)
+- Home dashboard with Published and Unpublished tabs
+- Toast notifications on all actions
+- Loading states and error handling throughout
+- Input validation — frontend + backend
+- Fully responsive — desktop and mobile
 
 ---
 
@@ -118,21 +113,20 @@ Assignment/
 ### Prerequisites
 
 - Node.js >= 18
-- npm >= 9
-- A MongoDB Atlas account (free) **or** local MongoDB installed
+- A free MongoDB Atlas account
 
 ---
 
-### 1. Clone the Repository
+### 1. Clone the repo
 
 ```bash
-git clone <your-repo-url>
-cd Assignment
+git clone https://github.com/mayanknaruka/productr.git
+cd productr
 ```
 
 ---
 
-### 2. Backend Setup
+### 2. Backend setup
 
 ```bash
 cd server
@@ -145,9 +139,9 @@ Create your `.env` file:
 copy .env.example .env
 ```
 
-Edit `server/.env` and set your MongoDB URI (see [Environment Variables](#environment-variables) below).
+Fill in the values (see [Environment Variables](#environment-variables) below).
 
-Start the backend:
+Start the server:
 
 ```bash
 npm run dev
@@ -161,7 +155,7 @@ MongoDB connected
 
 ---
 
-### 3. Frontend Setup
+### 3. Frontend setup
 
 Open a new terminal:
 
@@ -173,42 +167,45 @@ npm run dev
 
 Frontend runs at: **http://localhost:5173**
 
-The Vite dev server automatically proxies `/api` requests to `http://localhost:5000`.
-
 ---
 
-### 4. Seed the Database
-
-In the `server` directory, run:
+### 4. Seed sample data
 
 ```bash
+cd server
 node src/seed.js
 ```
 
-Expected output:
-```
-✓ Seeded 12 products
-```
+Output: `✓ Seeded 12 products`
 
 ---
 
 ## Environment Variables
 
-All environment variables go in `server/.env`.
+Create `server/.env` based on `server/.env.example`:
 
-| Variable    | Required | Description                    | Example                                                                 |
-|-------------|----------|--------------------------------|-------------------------------------------------------------------------|
-| `PORT`      | No       | Port for Express server        | `5000`                                                                  |
-| `MONGO_URI` | Yes      | MongoDB connection string      | `mongodb+srv://user:pass@cluster.mongodb.net/orufy_db`                 |
+```env
+PORT=5000
+MONGO_URI=mongodb+srv://user:password@cluster.mongodb.net/orufy_db
+EMAIL_USER=yourgmail@gmail.com
+EMAIL_PASS=your_gmail_app_password
+```
 
-### How to get a free MongoDB Atlas URI
+| Variable     | Required | Description                                      |
+|--------------|----------|--------------------------------------------------|
+| `PORT`       | No       | Express server port (default 5000)               |
+| `MONGO_URI`  | Yes      | MongoDB Atlas connection string                  |
+| `EMAIL_USER` | No       | Gmail address to send OTP from                   |
+| `EMAIL_PASS` | No       | Gmail App Password (16 chars, no spaces)         |
 
-1. Go to [https://cloud.mongodb.com](https://cloud.mongodb.com) and sign up free
-2. Create a free M0 cluster
-3. Under Security → Database Access: create a user with a password
-4. Under Security → Network Access: click "Allow Access from Anywhere"
-5. Click "Connect" on your cluster → Drivers → copy the URI
-6. Replace `<password>` with your actual password and paste into `server/.env`
+> If `EMAIL_USER` / `EMAIL_PASS` are not set, OTP shows on screen (demo mode).
+
+### How to get Gmail App Password
+
+1. Go to [myaccount.google.com/security](https://myaccount.google.com/security)
+2. Enable **2-Step Verification**
+3. Go to **App Passwords** → create one named "Productr"
+4. Copy the 16-character password → paste into `EMAIL_PASS` (no spaces)
 
 ---
 
@@ -218,40 +215,68 @@ Base URL: `http://localhost:5000/api`
 
 ### Auth
 
-| Method | Endpoint              | Description                        |
-|--------|-----------------------|------------------------------------|
-| POST   | `/auth/register`      | Register new user                  |
-| POST   | `/auth/send-otp`      | Send OTP to email/phone            |
-| POST   | `/auth/verify-otp`    | Verify OTP and get user session    |
+| Method | Endpoint            | Description                     |
+|--------|---------------------|---------------------------------|
+| POST   | `/auth/register`    | Register new user               |
+| POST   | `/auth/send-otp`    | Send OTP to email/phone         |
+| POST   | `/auth/verify-otp`  | Verify OTP and login            |
 
 ### Products
 
-| Method | Endpoint              | Description                        |
-|--------|-----------------------|------------------------------------|
-| GET    | `/products`           | Get all products                   |
-| GET    | `/products/:id`       | Get single product                 |
-| POST   | `/products`           | Create new product                 |
-| PUT    | `/products/:id`       | Update product                     |
-| DELETE | `/products/:id`       | Delete product                     |
+| Method | Endpoint           | Description          |
+|--------|--------------------|----------------------|
+| GET    | `/products`        | Get all products     |
+| GET    | `/products/:id`    | Get single product   |
+| POST   | `/products`        | Create product       |
+| PUT    | `/products/:id`    | Update product       |
+| DELETE | `/products/:id`    | Delete product       |
 
 ### Contact
 
-| Method | Endpoint   | Description              |
-|--------|------------|--------------------------|
-| POST   | `/contact` | Submit contact message   |
-| GET    | `/contact` | Get all messages         |
+| Method | Endpoint    | Description            |
+|--------|-------------|------------------------|
+| POST   | `/contact`  | Submit contact form    |
+| GET    | `/contact`  | Get all messages       |
 
 ---
 
-## How to Use the App
+## Deployment Guide
 
-1. Open **http://localhost:5173**
-2. Enter your email or phone number → click **Login**
-3. Check the **server terminal** for the OTP (e.g. `OTP for test@gmail.com: 482951`)
-4. Enter the 6-digit OTP → click **Enter your OTP**
-5. You're now logged in to the dashboard
-6. Go to **Products** → click **Add your Products** to create your first product
-7. Use **Publish** / **Edit** / **Delete** buttons on each product card
-8. Published products appear in the **Home → Published** tab
+### Backend → Render.com (free)
 
-> Note: OTP is printed to the server console for demo purposes. In production, it would be sent via SMS or email.
+1. Go to [render.com](https://render.com) → New → Web Service
+2. Connect GitHub → select `productr` repo
+3. Settings:
+   - Root directory: `server`
+   - Build command: `npm install`
+   - Start command: `npm start`
+4. Add environment variables:
+   - `MONGO_URI` = your Atlas URI
+   - `EMAIL_USER` = your Gmail
+   - `EMAIL_PASS` = your App Password
+   - `CLIENT_URL` = your Vercel URL (e.g. `https://productr.vercel.app`)
+5. Deploy → copy your Render URL
+
+### Frontend → Vercel.com (free)
+
+1. Go to [vercel.com](https://vercel.com) → New Project
+2. Import `productr` repo from GitHub
+3. Settings:
+   - Root directory: `client`
+   - Framework preset: Vite
+4. Add environment variable:
+   - `VITE_API_URL` = your Render URL + `/api` (e.g. `https://productr-api.onrender.com/api`)
+5. Deploy → your live URL is ready
+
+---
+
+## How to Use
+
+1. Open the app URL
+2. Enter your email → click **Login**
+3. OTP arrives in your inbox (or shown on screen in demo mode)
+4. Enter the 6-digit OTP → logged in
+5. Go to **Products** → click **Add your Products**
+6. Fill the form → **Create**
+7. Use **Publish** / **Edit** / **Delete** on each product card
+8. **Home** tab shows Published / Unpublished products separately

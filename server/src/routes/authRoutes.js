@@ -49,7 +49,8 @@ router.post('/send-otp',
       user.otpExpiry = new Date(Date.now() + 5 * 60 * 1000)
       await user.save()
       await sendOTP(contact, otp)
-      res.json({ message: 'OTP sent successfully' })
+      // Return OTP in response for demo purposes (remove in production)
+      res.json({ message: 'OTP sent successfully', demo_otp: otp })
     } catch (err) {
       res.status(500).json({ message: err.message })
     }
